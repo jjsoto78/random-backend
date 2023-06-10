@@ -1,0 +1,70 @@
+## initial server requests, GET user cards
+GET http://localhost:3000/resource
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS2FyaW4iLCJpYXQiOjE2ODE3ODEwOTIsImV4cCI6MTY4MTc4MTEwN30.In-sUD93hwNe4D8SU5E0kk_GxNL__s_WDDH6PqAsMx4
+
+###
+### authorization requests, create a new jwt token for user
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+    "username": "Karin"
+}
+###
+### authorization requests, logout invalidates refresh token
+DELETE http://localhost:4000/logout
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS2FyaW4iLCJpYXQiOjE2ODE3ODE0MDl9.SRHTl9RbodHv22-PnmhO3B8yJot3hpeWi4B-QzjiwyA"
+}
+
+###
+### authorization, create a new jwt refresh token, called when access token expired
+POST http://localhost:4000/refreshToken
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS2FyaW4iLCJpYXQiOjE2ODE3ODEyNzQsImV4cCI6MTY4MTc4MTI4OX0.UanJgr2nXgAyKng8PHoNPjcFGqOKEFN1Vzpisnacs0I"
+}
+
+
+### authentication requests
+POST http://localhost:5000/user
+Content-Type: application/json
+
+{
+    "name": "Yuri",
+    "password": "Yuri111"
+}
+### authentication requests
+POST http://localhost:5000/user
+Content-Type: application/json
+
+{
+    "name": "Karin",
+    "password": "Karin222"
+}
+### authentication request bad request
+POST http://localhost:5000/user
+Content-Type: application/json
+
+{
+    "password": "Yuri111"
+}
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "name": "Yuri",
+    "password": "Yuri111"
+}
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "name": "Karin",
+    "password": "Karin222"
+}
